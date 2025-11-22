@@ -1,0 +1,6 @@
+services:
+  front:
+    build: .
+    env_file: ".env"
+    ports:
+      - 3000:80

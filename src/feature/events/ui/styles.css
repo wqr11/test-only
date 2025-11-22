@@ -1,0 +1,11 @@
+.prev,
+.next {
+  position: absolute !important;
+}
+
+.prev {
+  left: 15px !important;
+}
+.next {
+  right: 15px !important;
+}
