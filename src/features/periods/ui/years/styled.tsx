@@ -9,6 +9,7 @@ export const YearsStyled = styled.div`
   position: absolute;
   top: 50%;
   left: 0;
+  z-index: 2;
   transform: translateY(-50%);
 `;
 

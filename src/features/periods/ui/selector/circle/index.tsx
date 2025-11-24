@@ -1,0 +1,173 @@
+import gsap from "gsap";
+import {
+  CircleAbsolute,
+  CircleWidgetStyled,
+  CircleWidgetWrapper,
+  CircleRelative,
+  CircleRelativeDot,
+  CircleRelativeNum,
+  CircleRelativeText,
+} from "./styled";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { useTheme } from "styled-components";
+import { useRootPageContext } from "@/features/root";
+
+const RADIUS = 265;
+const DOTS_NUMBER = 6;
+const CONTAINER_SIZE = 530;
+
+const TEXTS = ["", "Кино", "Литература", "", "", "Наука"] as const;
+
+export const CircleWidget = () => {
+  const theme = useTheme();
+
+  const [animationInProgress, setAnimationInProgress] =
+    useState<boolean>(false);
+
+  const { setPage } = useRootPageContext();
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentAngle, setCurrentAngle] = useState<number>(0);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleClick = (idx: number) => {
+    if (animationInProgress || currentIndex === idx) {
+      return;
+    }
+
+    setAnimationInProgress(true);
+
+    const step = 360 / DOTS_NUMBER;
+
+    let diff = idx - currentIndex;
+
+    if (diff > DOTS_NUMBER / 2) {
+      diff -= DOTS_NUMBER;
+    } else if (diff < -DOTS_NUMBER / 2) {
+      diff += DOTS_NUMBER;
+    }
+
+    const newAngle = currentAngle - diff * step;
+
+    setCurrentIndex(idx);
+    setCurrentAngle(newAngle);
+
+    setPage(idx);
+
+    const ANGLE_EASING = "power2.inOut";
+
+    gsap.to(ref.current, {
+      rotateZ: `${newAngle}deg`,
+      duration: 1.5,
+      ease: ANGLE_EASING,
+      onComplete: () => setAnimationInProgress(false),
+    });
+    gsap.to(".dot-wrapper", {
+      rotateZ: `${-newAngle}deg`,
+      duration: 1.5,
+      ease: ANGLE_EASING,
+    });
+    gsap.to(".text", {
+      display: "none",
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(`#dot-${idx} .text`, {
+      display: "block",
+      opacity: 1,
+      duration: 0.4,
+      delay: 1.5,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseEnter = useCallback((i: number) => {
+    const id = `dot-${i}`;
+    gsap.to(`#${id} .dot`, {
+      width: 56,
+      height: 56,
+      border: `1px solid ${theme.blackBlue}80`,
+      backgroundColor: "#F4F5F9",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(`#${id} .num`, {
+      opacity: 1,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback((i: number) => {
+    const id = `dot-${i}`;
+    gsap.to(`#${id} .dot`, {
+      width: 6,
+      height: 6,
+      border: "none",
+      backgroundColor: theme.blackBlue,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(`#${id} .num`, {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const buttonsNode = useMemo(
+    () =>
+      Array.from({ length: DOTS_NUMBER }).map((_, i) => {
+        const angle = (2 * Math.PI * i) / DOTS_NUMBER - Math.PI / 3;
+        const leftPercent =
+          ((RADIUS + RADIUS * Math.cos(angle)) / CONTAINER_SIZE) * 100;
+        const topPercent =
+          ((RADIUS + RADIUS * Math.sin(angle)) / CONTAINER_SIZE) * 100;
+        const id = `dot-${i}`;
+        return (
+          <CircleAbsolute
+            key={id}
+            id={id}
+            $top={topPercent}
+            $left={leftPercent}
+            onClick={() => handleClick(i)}
+            onMouseEnter={() => handleMouseEnter(i)}
+            onMouseLeave={() => handleMouseLeave(i)}
+          >
+            <CircleRelative>
+              <CircleRelativeDot />
+              <CircleRelativeNum>{i + 1}</CircleRelativeNum>
+              <CircleRelativeText>{TEXTS[i]}</CircleRelativeText>
+            </CircleRelative>
+          </CircleAbsolute>
+        );
+      }),
+    [animationInProgress]
+  );
+
+  return (
+    <CircleWidgetStyled>
+      <CircleWidgetWrapper ref={ref}>
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 530 530"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            id="bigc"
+            opacity="0.4"
+            cx="265"
+            cy="265"
+            r={RADIUS}
+            stroke="#42567A80"
+          />
+        </svg>
+        {buttonsNode}
+      </CircleWidgetWrapper>
+    </CircleWidgetStyled>
+  );
+};

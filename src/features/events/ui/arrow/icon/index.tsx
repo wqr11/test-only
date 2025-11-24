@@ -16,7 +16,7 @@ export const ArrowLeftIcon = ({
     <path
       d="M7.66418 0.707108L1.41419 6.95711L7.66418 13.2071"
       stroke={stroke}
-      stroke-width={strokeWidth}
+      strokeWidth={strokeWidth}
     />
   </svg>
 );

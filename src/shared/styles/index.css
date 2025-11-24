@@ -18,9 +18,11 @@ body {
   padding: 0;
   background-color: #f4f5f9;
   font-family: "PT Sans Regular";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+
   user-select: none;
   -moz-user-select: none;
 }

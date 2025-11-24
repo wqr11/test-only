@@ -1,12 +1,12 @@
-import { CircleIcon } from "./circle";
-import { LinesIcon } from "./lines";
+import { CircleWidget } from "./circle";
+import { Lines } from "./lines";
 import { PeriodsSelectorStyled } from "./styled";
 
 export const PeriodsSelector = () => {
   return (
     <PeriodsSelectorStyled>
-      <CircleIcon />
-      <LinesIcon />
+      <CircleWidget />
+      <Lines />
     </PeriodsSelectorStyled>
   );
 };

@@ -9,7 +9,7 @@ export const RootPageStyled = styled.div`
   border-inline: 1px solid ${({ theme }) => theme.blackBlue}19;
 `;
 
-export const RootPageHeader = styled.div`
+export const RootPageHeading = styled.div`
   width: fit-content;
   height: fit-content;
   display: flex;
