@@ -11,6 +11,8 @@ import {
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import { useRootPageContext } from "@/features/root";
+import { useGSAP } from "@gsap/react";
+import { CircleIcon } from "./icon";
 
 const RADIUS = 265;
 const DOTS_NUMBER = 6;
@@ -55,8 +57,36 @@ export const CircleWidget = () => {
 
     setPage(idx);
 
-    const ANGLE_EASING = "power2.inOut";
+    const id = `dot-${idx}`;
+    gsap.to(`.dot-wrapper:not(#${id}) .dot`, {
+      width: 6,
+      height: 6,
+      border: "none",
+      backgroundColor: theme.blackBlue,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(`.dot-wrapper:not(#${id})  .num`, {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+    });
 
+    gsap.to(`#${id} .dot`, {
+      width: 56,
+      height: 56,
+      border: `1px solid ${theme.blackBlue}80`,
+      backgroundColor: "#F4F5F9",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(`#${id} .num`, {
+      opacity: 1,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
+    const ANGLE_EASING = "power2.inOut";
     gsap.to(ref.current, {
       rotateZ: `${newAngle}deg`,
       duration: 1.5,
@@ -83,39 +113,47 @@ export const CircleWidget = () => {
     });
   };
 
-  const handleMouseEnter = useCallback((i: number) => {
-    const id = `dot-${i}`;
-    gsap.to(`#${id} .dot`, {
-      width: 56,
-      height: 56,
-      border: `1px solid ${theme.blackBlue}80`,
-      backgroundColor: "#F4F5F9",
-      duration: 0.4,
-      ease: "power2.out",
-    });
-    gsap.to(`#${id} .num`, {
-      opacity: 1,
-      duration: 0.4,
-      ease: "power2.out",
-    });
-  }, []);
+  const handleMouseEnter = useCallback(
+    (i: number) => {
+      if (i === currentIndex) return;
+      const id = `dot-${i}`;
+      gsap.to(`#${id} .dot`, {
+        width: 56,
+        height: 56,
+        border: `1px solid ${theme.blackBlue}80`,
+        backgroundColor: "#F4F5F9",
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(`#${id} .num`, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    },
+    [currentIndex]
+  );
 
-  const handleMouseLeave = useCallback((i: number) => {
-    const id = `dot-${i}`;
-    gsap.to(`#${id} .dot`, {
-      width: 6,
-      height: 6,
-      border: "none",
-      backgroundColor: theme.blackBlue,
-      duration: 0.4,
-      ease: "power2.out",
-    });
-    gsap.to(`#${id} .num`, {
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.out",
-    });
-  }, []);
+  const handleMouseLeave = useCallback(
+    (i: number) => {
+      if (i === currentIndex) return;
+      const id = `dot-${i}`;
+      gsap.to(`#${id} .dot`, {
+        width: 6,
+        height: 6,
+        border: "none",
+        backgroundColor: theme.blackBlue,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(`#${id} .num`, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    },
+    [currentIndex]
+  );
 
   const buttonsNode = useMemo(
     () =>
@@ -147,25 +185,25 @@ export const CircleWidget = () => {
     [animationInProgress]
   );
 
+  useGSAP(() => {
+    const id = "dot-0";
+    gsap.to(`#${id} .dot`, {
+      width: 56,
+      height: 56,
+      border: `1px solid ${theme.blackBlue}80`,
+      backgroundColor: "#F4F5F9",
+      duration: 0,
+    });
+    gsap.to(`#${id} .num`, {
+      opacity: 1,
+      duration: 0,
+    });
+  }, []);
+
   return (
     <CircleWidgetStyled>
       <CircleWidgetWrapper ref={ref}>
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 530 530"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle
-            id="bigc"
-            opacity="0.4"
-            cx="265"
-            cy="265"
-            r={RADIUS}
-            stroke="#42567A80"
-          />
-        </svg>
+        <CircleIcon radius={RADIUS} />
         {buttonsNode}
       </CircleWidgetWrapper>
     </CircleWidgetStyled>

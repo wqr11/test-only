@@ -10,13 +10,13 @@ export const RootPageStyled = styled.div`
 `;
 
 export const RootPageHeading = styled.div`
-  width: fit-content;
-  height: fit-content;
+  width: min-content;
+  height: min-content;
   display: flex;
   align-items: center;
   padding-left: 78px;
   position: relative;
-  margin-top: 177px;
+  margin-top: 15vh;
   &::before {
     content: "";
     position: absolute;

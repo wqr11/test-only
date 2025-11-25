@@ -1,12 +1,16 @@
-import { PeriodsSelector } from "./selector";
-import { PeriodsStyled } from "./styled";
+import { CircleWidget } from "./circle";
+import { Lines } from "./lines";
 import { Years } from "./years";
+import { PeriodsStyled, PeriodsWrapper } from "./styled";
 
 export const Periods = () => {
   return (
     <PeriodsStyled>
-      <PeriodsSelector />
-      <Years />
+      <PeriodsWrapper>
+        <CircleWidget />
+        <Lines />
+        <Years />
+      </PeriodsWrapper>
     </PeriodsStyled>
   );
 };

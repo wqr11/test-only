@@ -7,6 +7,7 @@ export const CircleWidgetStyled = styled.div`
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%) translate3d(0, 0, 0) scale(1.01);
+  z-index: 3;
 `;
 
 export const CircleWidgetWrapper = styled.div`
@@ -29,7 +30,6 @@ export const CircleAbsolute = styled.button.attrs<CircleButtonProps>({
   top: ${({ $top }) => $top}%;
   left: ${({ $left }) => $left}%;
   transform: translateX(-50%) translateY(-50%) translate3d(0, 0, 0);
-  z-index: 3;
   cursor: pointer;
   will-change: transform;
 `;
@@ -41,7 +41,6 @@ export const CircleRelative = styled.div`
   width: 56px;
   height: 56px;
   position: relative;
-  z-index: 2;
 `;
 
 export const CircleRelativeDot = styled.div.attrs({
