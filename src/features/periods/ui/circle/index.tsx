@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap from 'gsap';
 import {
   CircleAbsolute,
   CircleWidgetStyled,
@@ -7,18 +7,18 @@ import {
   CircleRelativeDot,
   CircleRelativeNum,
   CircleRelativeText,
-} from "./styled";
-import { useCallback, useMemo, useRef, useState } from "react";
-import { useTheme } from "styled-components";
-import { useRootPageContext } from "@/features/root";
-import { useGSAP } from "@gsap/react";
-import { CircleIcon } from "./icon";
+} from './styled';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
+import { useRootPageContext } from '@/features/root';
+import { useGSAP } from '@gsap/react';
+import { CircleIcon } from './icon';
 
 const RADIUS = 265;
 const DOTS_NUMBER = 6;
 const CONTAINER_SIZE = 530;
 
-const TEXTS = ["", "Кино", "Литература", "", "", "Наука"] as const;
+const TEXTS = ['', 'Кино', 'Литература', '', '', 'Наука'] as const;
 
 export const CircleWidget = () => {
   const theme = useTheme();
@@ -40,6 +40,9 @@ export const CircleWidget = () => {
 
     setAnimationInProgress(true);
 
+    setCurrentIndex(idx);
+    setPage(idx);
+
     const step = 360 / DOTS_NUMBER;
 
     let diff = idx - currentIndex;
@@ -51,65 +54,61 @@ export const CircleWidget = () => {
     }
 
     const newAngle = currentAngle - diff * step;
-
-    setCurrentIndex(idx);
     setCurrentAngle(newAngle);
-
-    setPage(idx);
 
     const id = `dot-${idx}`;
     gsap.to(`.dot-wrapper:not(#${id}) .dot`, {
       width: 6,
       height: 6,
-      border: "none",
+      border: 'none',
       backgroundColor: theme.blackBlue,
       duration: 0.4,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
     gsap.to(`.dot-wrapper:not(#${id})  .num`, {
       opacity: 0,
       duration: 0.4,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
 
     gsap.to(`#${id} .dot`, {
       width: 56,
       height: 56,
       border: `1px solid ${theme.blackBlue}80`,
-      backgroundColor: "#F4F5F9",
+      backgroundColor: '#F4F5F9',
       duration: 0.4,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
     gsap.to(`#${id} .num`, {
       opacity: 1,
       duration: 0.4,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
 
-    const ANGLE_EASING = "power2.inOut";
+    const ANGLE_EASING = 'power2.inOut';
     gsap.to(ref.current, {
       rotateZ: `${newAngle}deg`,
       duration: 1.5,
       ease: ANGLE_EASING,
       onComplete: () => setAnimationInProgress(false),
     });
-    gsap.to(".dot-wrapper", {
+    gsap.to('.dot-wrapper', {
       rotateZ: `${-newAngle}deg`,
       duration: 1.5,
       ease: ANGLE_EASING,
     });
-    gsap.to(".text", {
-      display: "none",
+    gsap.to('.text', {
+      display: 'none',
       opacity: 0,
       duration: 0.4,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
     gsap.to(`#dot-${idx} .text`, {
-      display: "block",
+      display: 'block',
       opacity: 1,
       duration: 0.4,
       delay: 1.5,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
   };
 
@@ -121,17 +120,17 @@ export const CircleWidget = () => {
         width: 56,
         height: 56,
         border: `1px solid ${theme.blackBlue}80`,
-        backgroundColor: "#F4F5F9",
+        backgroundColor: '#F4F5F9',
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
       gsap.to(`#${id} .num`, {
         opacity: 1,
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     },
-    [currentIndex]
+    [currentIndex],
   );
 
   const handleMouseLeave = useCallback(
@@ -141,18 +140,18 @@ export const CircleWidget = () => {
       gsap.to(`#${id} .dot`, {
         width: 6,
         height: 6,
-        border: "none",
+        border: 'none',
         backgroundColor: theme.blackBlue,
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
       gsap.to(`#${id} .num`, {
         opacity: 0,
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     },
-    [currentIndex]
+    [currentIndex],
   );
 
   const buttonsNode = useMemo(
@@ -182,16 +181,16 @@ export const CircleWidget = () => {
           </CircleAbsolute>
         );
       }),
-    [animationInProgress]
+    [animationInProgress],
   );
 
   useGSAP(() => {
-    const id = "dot-0";
+    const id = 'dot-0';
     gsap.to(`#${id} .dot`, {
       width: 56,
       height: 56,
       border: `1px solid ${theme.blackBlue}80`,
-      backgroundColor: "#F4F5F9",
+      backgroundColor: '#F4F5F9',
       duration: 0,
     });
     gsap.to(`#${id} .num`, {

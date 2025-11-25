@@ -1,6 +1,6 @@
-import { css, styled } from "styled-components";
+import { css, styled } from 'styled-components';
 
-export interface EventsArrowStyledProps {
+export interface ArrowButtonStyledProps {
   className?: string;
   $reversed?: boolean;
   $transparent?: boolean;
@@ -8,7 +8,7 @@ export interface EventsArrowStyledProps {
   $hidden?: boolean;
 }
 
-export const EventsArrowStyled = styled.button<EventsArrowStyledProps>`
+export const ArrowButtonStyled = styled.button<ArrowButtonStyledProps>`
   all: unset;
   width: 50px;
   height: 50px;
@@ -16,14 +16,18 @@ export const EventsArrowStyled = styled.button<EventsArrowStyledProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  rotate: ${({ $reversed }) => ($reversed ? "180deg" : "0deg")};
+  rotate: ${({ $reversed }) => ($reversed ? '180deg' : '0deg')};
   cursor: pointer;
-  visibility: ${({ $hidden }) => ($hidden ? "hidden" : "visible")};
+  visibility: ${({ $hidden }) => ($hidden ? 'hidden' : 'visible')};
+  transition: all 150ms ease-in-out;
+  &:hover {
+    background-color: white;
+  }
   ${({ $transparent = true, $disabled, theme }) =>
     $transparent
       ? css`
           border: 1px solid ${({ theme }) => theme.gray}80;
-          opacity: ${!$disabled ? "0.5" : "1"};
+          opacity: ${$disabled ? '0.5' : '1'};
           svg path {
             stroke: ${theme.gray};
           }
