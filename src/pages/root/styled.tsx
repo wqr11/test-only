@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from "styled-components";
 
 export const RootPageStyled = styled.div`
   width: 75vw;
@@ -22,24 +22,25 @@ export const RootPageHeading = styled.div`
   position: relative;
   margin-top: 15vh;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 5px;
-    height: 100%;
+    height: 120px;
     background: linear-gradient(
       180deg,
       ${({ theme }) => theme.blue},
       ${({ theme }) => theme.fuschia}
     );
+    transform: translateY(-50%);
     z-index: 0;
   }
 `;
 
 export const RootPageTitle = styled.h1`
   max-width: 352px;
-  font-family: 'PT Sans Bold';
+  font-family: "PT Sans Bold";
   font-size: 56px;
   line-height: 120%;
   color: ${({ theme }) => theme.blackBlue};
