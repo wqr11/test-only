@@ -1,6 +1,10 @@
 .prev,
 .next {
   position: absolute !important;
+  z-index: 4 !important;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 }
 
 .prev {
@@ -8,4 +12,8 @@
 }
 .next {
   right: 15px !important;
+}
+
+.swiper-slide {
+  width: auto !important;
 }

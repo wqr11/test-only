@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const EventCardStyled = styled.div`
   width: 320px;
+  max-width: 320px;
   max-height: 140px;
   display: flex;
   flex-direction: column;

@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { Router } from "@/router";
 import { ThemeProvider } from "@/shared/theme";
@@ -42,9 +41,7 @@ gsap.registerEffect({
 });
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
-  <StrictMode>
-    <ThemeProvider>
-      <Router />
-    </ThemeProvider>
-  </StrictMode>
+  <ThemeProvider>
+    <Router />
+  </ThemeProvider>
 );

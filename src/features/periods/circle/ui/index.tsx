@@ -96,16 +96,12 @@ export const CircleWidget = () => {
         },
         "<"
       )
-      .to(
-        `#dot-${idx} .text`,
-        {
-          display: "block",
-          opacity: 1,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        ">"
-      );
+      .to(`#dot-${idx} .text`, {
+        display: "block",
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
   };
 
   const handleMouseEnter = useCallback(

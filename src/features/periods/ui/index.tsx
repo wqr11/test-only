@@ -8,8 +8,8 @@ export const Periods = () => {
     <PeriodsStyled>
       <PeriodsWrapper>
         <CircleWidget />
-        <Lines />
         <Years />
+        <Lines />
       </PeriodsWrapper>
     </PeriodsStyled>
   );

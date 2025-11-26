@@ -1,8 +1,9 @@
 import { SVGProps } from "react";
+import { LinesStyled } from "./styled";
 
 export const Lines = (props: SVGProps<SVGSVGElement>) => {
   return (
-    <div style={{ width: "100%", height: "100%", zIndex: 1 }}>
+    <LinesStyled>
       <svg width="100%" height="100%" viewBox="0 0 1024 1024" {...props}>
         <line
           x1="50%"
@@ -21,6 +22,6 @@ export const Lines = (props: SVGProps<SVGSVGElement>) => {
           strokeWidth="1"
         />
       </svg>
-    </div>
+    </LinesStyled>
   );
 };

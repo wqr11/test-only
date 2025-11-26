@@ -1,13 +1,19 @@
-import { styled } from 'styled-components';
+import { styled } from "styled-components";
 
 export const CircleWidgetStyled = styled.div`
   width: fit-content;
   height: fit-content;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 24px);
   left: 50%;
   transform: translateX(-50%) translateY(-50%) translate3d(0, 0, 0) scale(1.01);
   z-index: 3;
+  @media (max-width: 1280px) {
+    transform: translateX(-50%) translateY(-50%) translate3d(0, 0, 0) scale(0.8);
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const CircleWidgetWrapper = styled.div`
@@ -23,7 +29,7 @@ export interface CircleButtonProps {
 }
 
 export const CircleAbsolute = styled.button.attrs<CircleButtonProps>({
-  className: 'dot-wrapper',
+  className: "dot-wrapper",
 })`
   all: unset;
   position: absolute;
@@ -44,7 +50,7 @@ export const CircleRelative = styled.div`
 `;
 
 export const CircleRelativeDot = styled.div.attrs({
-  className: 'dot',
+  className: "dot",
 })`
   width: 6px;
   height: 6px;
@@ -57,11 +63,11 @@ export const CircleRelativeDot = styled.div.attrs({
 `;
 
 export const CircleRelativeNum = styled.span.attrs({
-  className: 'num',
+  className: "num",
 })`
   width: fit-content;
   height: fit-content;
-  font-family: 'PT Sans Regular';
+  font-family: "PT Sans Regular";
   font-size: 20px;
   line-height: 150%;
   opacity: 0;
@@ -73,12 +79,12 @@ export const CircleRelativeNum = styled.span.attrs({
 `;
 
 export const CircleRelativeText = styled.span.attrs({
-  className: 'text',
+  className: "text",
 })`
   display: none;
   width: fit-content;
   height: fit-content;
-  font-family: 'PT Sans Bold';
+  font-family: "PT Sans Bold";
   font-size: 20px;
   line-height: 150%;
   opacity: 0;

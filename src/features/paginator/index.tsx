@@ -1,14 +1,9 @@
-import * as S from './styled';
-import { useRootPageContext } from '../root';
-import { useEffect } from 'react';
-import { ArrowButton } from '@/shared/ui';
+import * as S from "./styled";
+import { useRootPageContext } from "../root";
+import { ArrowButton } from "@/shared/ui";
 
 export const Paginator = () => {
   const { page, setPage } = useRootPageContext();
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
 
   return (
     <S.PaginatorStyled>

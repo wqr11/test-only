@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components';
+import { css, styled } from "styled-components";
 
 export interface ArrowButtonStyledProps {
   className?: string;
@@ -16,9 +16,9 @@ export const ArrowButtonStyled = styled.button<ArrowButtonStyledProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  rotate: ${({ $reversed }) => ($reversed ? '180deg' : '0deg')};
+  rotate: ${({ $reversed }) => ($reversed ? "180deg" : "0deg")};
   cursor: pointer;
-  visibility: ${({ $hidden }) => ($hidden ? 'hidden' : 'visible')};
+  visibility: ${({ $hidden }) => ($hidden ? "hidden" : "visible")};
   transition: all 150ms ease-in-out;
   &:hover {
     background-color: white;
@@ -27,7 +27,7 @@ export const ArrowButtonStyled = styled.button<ArrowButtonStyledProps>`
     $transparent
       ? css`
           border: 1px solid ${({ theme }) => theme.gray}80;
-          opacity: ${$disabled ? '0.5' : '1'};
+          opacity: ${$disabled ? "0.5" : "1"};
           svg path {
             stroke: ${theme.gray};
           }
@@ -39,4 +39,8 @@ export const ArrowButtonStyled = styled.button<ArrowButtonStyledProps>`
             stroke: ${theme.blue};
           }
         `}
+  @media(max-width: 768px) {
+    width: 36px;
+    height: 36px;
+  }
 `;
