@@ -33,12 +33,14 @@ export const CircleWidget = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
 
-  const handleClick = (idx: number, ignoreProgress?: boolean) => {
-    if (!ignoreProgress && (animationInProgress || currentIndex === idx)) {
+  const handleClick = (idx: number, simulatedClick?: boolean) => {
+    if (!simulatedClick && (animationInProgress || currentIndex === idx)) {
       return;
     }
 
-    setAnimationInProgress(true);
+    if (!simulatedClick) {
+      setAnimationInProgress(true);
+    }
 
     setCurrentIndex(idx);
     setPage(idx);

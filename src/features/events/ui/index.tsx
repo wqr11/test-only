@@ -31,7 +31,9 @@ export const EventsSwiper = () => {
     (page: number) =>
       SLIDES_DATA[page].map(({ content, title }) => (
         <SwiperSlide key={content}>
-          <EventCard title={title}>{content}</EventCard>
+          <EventCard key={`card-${content}`} title={title}>
+            {content}
+          </EventCard>
         </SwiperSlide>
       )),
     []
@@ -122,7 +124,11 @@ export const EventsSwiper = () => {
       </EventsWrapper>
       <EventsDotPagination>
         {Array.from({ length: 6 }).map((_, i) => (
-          <DotButton className="pagination-dot" $active={page === i} />
+          <DotButton
+            key={`pagination-dot-${i}`}
+            className="pagination-dot"
+            $active={page === i}
+          />
         ))}
       </EventsDotPagination>
     </EventsStyled>
